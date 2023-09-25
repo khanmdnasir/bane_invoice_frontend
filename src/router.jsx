@@ -6,6 +6,7 @@ import PrivateLayout from "./components/PrivateLayout";
 import Contact from "./views/Contact";
 import Invoice from "./views/Invoice";
 import ForgetPassword from "./views/ForgetPassword";
+import CreateNewPassword from "./views/CreateNewPassword";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path:'forgetpassword',
                 element: <ForgetPassword/>
+            },
+            {
+                path:'createnewpassword',
+                element: <CreateNewPassword/>
             },
         ]
     },
