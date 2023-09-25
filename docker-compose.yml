@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  mlat_frontend:
+    build:
+      context: .
+    container_name: bane_fr
+    image: bane_fr
+    command: npm run start
+    ports:
+      - 3000:3000
+    networks:
+      - bane_frontend_network
+
+networks:
+  bane_frontend_network:
+    driver: bridge
