@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from '../assets/banelogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import TextInput from "../components/TextInput";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -21,7 +22,6 @@ const Login = () => {
     };
 
     const isValidEmail = (email) => {
-
         return email.includes('@');
     };
 
@@ -45,9 +45,7 @@ const Login = () => {
         setErrors(newErrors);
 
         if (!newErrors.email && !newErrors.password) {
-
-            console.log("Form data to be sent:", formData);
-
+            console.log('Form data to be sent:', formData);
         }
     };
 
@@ -63,17 +61,15 @@ const Login = () => {
                             Email Address
                         </label>
                         <div className="mt-2">
-                            <input
-                                id="email"
-                                name="email"
+                            {/* Use the TextInput component */}
+                            <TextInput
                                 type="email"
-                                autoComplete="email"
+                                name="email"
                                 placeholder="Enter your E-mail"
-                                className="block w-full border-b-2 border-gray-300 py-1.5 text-gray-900  placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
                                 value={formData.email}
                                 onChange={handleInputChange}
+                                error={errors.email}
                             />
-                            {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
                         </div>
                     </div>
 
@@ -84,22 +80,20 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="mt-2 relative">
-                            <input
-                                id="password"
-                                name="password"
+                            {/* Use the TextInput component */}
+                            <TextInput
                                 type={passwordVisible ? 'text' : 'password'}
+                                name="password"
+                                placeholder="Password"
                                 value={formData.password}
                                 onChange={handleInputChange}
-                                autoComplete="current-password"
-                                placeholder="Password"
-                                className="block w-full border-b-2 border-gray-300 py-1.5 text-gray-900  placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
+                                error={errors.password}
                             />
                             <FontAwesomeIcon
                                 icon={passwordVisible ? faEyeSlash : faEye}
                                 className="password-icon absolute right-0 top-2 text-gray-400 cursor-pointer"
                                 onClick={togglePasswordVisibility}
                             />
-                            {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
                         </div>
                     </div>
 
@@ -111,17 +105,15 @@ const Login = () => {
                             Login
                         </button>
                     </div>
-
                 </form>
-              
             </div>
             <div className="text-sm flex justify-center mt-4">
-                    <a href="login/forgetpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                        Forgot password?
-                    </a>
-                </div>
+                <a href="login/forgetpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Forgot password?
+                </a>
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default Login;
