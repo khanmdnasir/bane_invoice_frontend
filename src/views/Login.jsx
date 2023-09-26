@@ -3,11 +3,17 @@ import Image from '../assets/banelogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import TextInput from "../components/TextInput";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest } from "../redux/actions";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errors, setErrors] = useState({ email: '', password: '' });
+    const dispatch = useDispatch();
+    // const error = useSelector((state) => state.auth.error);
+
+    
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -45,7 +51,7 @@ const Login = () => {
         setErrors(newErrors);
 
         if (!newErrors.email && !newErrors.password) {
-            console.log('Form data to be sent:', formData);
+            dispatch(loginRequest(formData));
         }
     };
 
