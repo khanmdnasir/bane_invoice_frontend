@@ -6,6 +6,7 @@ import PrivateLayout from "./components/PrivateLayout";
 import Contact from "./views/Contact";
 import Invoice from "./views/Invoice";
 import ForgetPassword from "./views/ForgetPassword";
+import PasswordReset from "./views/PasswordReset";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path:'forgetpassword',
                 element: <ForgetPassword/>
+            },
+            {
+                path:'passwordreset',
+                element: <PasswordReset/>
             },
         ]
     },
