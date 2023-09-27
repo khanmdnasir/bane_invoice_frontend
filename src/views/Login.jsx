@@ -5,15 +5,25 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import TextInput from "../components/TextInput";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from "../redux/actions";
+import axios from "axios";
 
 const Login = () => {
+    
+    // axios.post(`http://192.168.30.17:8000/api/auth/`,{
+    //     "email" : "admin@gmail.com",
+    //     "password":"admin"
+    // }).then((response)=>{
+    //     console.log(response.data)
+    // })
+
+
+
+
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errors, setErrors] = useState({ email: '', password: '' });
     const dispatch = useDispatch();
     // const error = useSelector((state) => state.auth.error);
-
-    
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
