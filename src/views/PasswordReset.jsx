@@ -87,7 +87,7 @@ const PasswordReset = () => {
             </label>
             <div className="mt-2">
               <TextInput
-                ClassName="text-gray-500"
+                ClassName="!text-gray-500"
                 id="email"
                 type="email"
                 name="email"
