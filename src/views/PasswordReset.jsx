@@ -81,12 +81,13 @@ const PasswordReset = () => {
           <div className="px-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900 "
+              className="block text-sm font-medium leading-6"
             >
               Email Address
             </label>
             <div className="mt-2">
               <TextInput
+                ClassName="text-gray-500"
                 id="email"
                 type="email"
                 name="email"
