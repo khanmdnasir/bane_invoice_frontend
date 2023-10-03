@@ -1,29 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from '../assets/banelogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import TextInput from "../components/TextInput";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from "../redux/actions";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    
-    // axios.post(`http://192.168.30.17:8000/api/auth/`,{
-    //     "email" : "admin@gmail.com",
-    //     "password":"admin"
-    // }).then((response)=>{
-    //     console.log(response.data)
-    // })
-
-
-
-
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errors, setErrors] = useState({ email: '', password: '' });
     const dispatch = useDispatch();
-    // const error = useSelector((state) => state.auth.error);
+    const navigate = useNavigate();
+
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    console.log(isAuthenticated);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -37,9 +30,16 @@ const Login = () => {
         });
     };
 
+    useEffect(() => {
+        if (isAuthenticated == true) {
+            navigate('/dashboard')
+        }
+    }, [isAuthenticated])
+    
     const isValidEmail = (email) => {
         return email.includes('@');
     };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -62,9 +62,12 @@ const Login = () => {
 
         if (!newErrors.email && !newErrors.password) {
             dispatch(loginRequest(formData));
-        }
-    };
 
+
+        }
+
+    };
+ 
     return (
         <div className="justify-center min-h-screen flex  flex-col items-center">
             <div className="w-80  max-h-max shadow-xl sm:w-96 ">
@@ -77,7 +80,6 @@ const Login = () => {
                             Email Address
                         </label>
                         <div className="mt-2">
-                            {/* Use the TextInput component */}
                             <TextInput
                                 type="email"
                                 name="email"

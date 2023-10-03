@@ -9,50 +9,51 @@ import ForgetPassword from "./views/ForgetPassword";
 import PasswordReset from "./views/PasswordReset";
 
 
-const router = createBrowserRouter([
+
+   export const router = createBrowserRouter([
    
-    {
-        path:'/login',
-        element: <GuestLayout/>,
-        children:[
-            {
-                path:'/login',
-                element: <Login/>
-            },
-
-            {
-                path:'forgetpassword',
-                element: <ForgetPassword/>
-            },
-            {
-                path:'passwordreset',
-                element: <PasswordReset/>
-            },
-        ]
-    },
-
-    {
-        path:'/',
-        element: <PrivateLayout/>,
-        children:[
-            {
-                path:'/',
-                element:<Dashboard/>
-            },
-            {
-                path:'dashboard',
-                element:<Dashboard/>
-            },
-            {
-                path:'invoice',
-                element:<Invoice/>
-            },
-            {
-                path:'contact',
-                element:<Contact/>
-            },
-        ]
-    }  
-])
-
-export default router;
+        {
+            path:'/',
+            element: <GuestLayout/>,
+            children:[
+                {
+                    path:'/',
+                    element: <Login/>
+                },
+    
+                {
+                    path:'forgetpassword',
+                    element: <ForgetPassword/>
+                },
+                {
+                    path:'passwordreset',
+                    element: <PasswordReset/>
+                },
+            ]
+        },
+    
+        
+    
+        {
+            path:'/dashboard',
+            element: <PrivateLayout/>,
+            children:[
+                {
+                    path:'/dashboard',
+                    element:<Dashboard/>
+                },
+                {
+                    path:'dashboard',
+                    element:<Dashboard/>
+                },
+                {
+                    path:'invoice',
+                    element:<Invoice/>
+                },
+                {
+                    path:'contact',
+                    element:<Contact/>
+                },
+            ]
+        }  
+    ])

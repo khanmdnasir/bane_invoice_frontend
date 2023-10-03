@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 
+
 const GuestLayout =()=>{
+
 return(
     <div>
         <Outlet/>
@@ -9,3 +11,4 @@ return(
 }
 
 export default GuestLayout;
+
