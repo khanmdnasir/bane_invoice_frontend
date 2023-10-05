@@ -11,13 +11,12 @@ import PasswordReset from "./views/PasswordReset";
 
 
    export const router = createBrowserRouter([
-   
         {
-            path:'/',
+            path:'/login',
             element: <GuestLayout/>,
             children:[
                 {
-                    path:'/',
+                    path:'/login',
                     element: <Login/>
                 },
     
@@ -31,17 +30,12 @@ import PasswordReset from "./views/PasswordReset";
                 },
             ]
         },
-    
-        
+
     
         {
-            path:'/dashboard',
-            element: <PrivateLayout/>,
+            path:'/',
+            element:<PrivateLayout/>,
             children:[
-                {
-                    path:'/dashboard',
-                    element:<Dashboard/>
-                },
                 {
                     path:'dashboard',
                     element:<Dashboard/>

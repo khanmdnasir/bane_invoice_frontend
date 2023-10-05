@@ -1,18 +1,36 @@
 // sagas/authSaga.js
 
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, all, takeLatest, takeEvery,fork } from 'redux-saga/effects';
 import { LOGIN_REQUEST, loginSuccess, loginFailure } from './actions';
 import { loginApi } from './loginApi'; 
+import { APICore} from '../helper/AxiosConfig';
 
-function* handleLogin(action) {
+
+const api = new APICore();
+
+
+function* handleLogin({ payload: { email, password }}) {
   try {
-    const user = yield call(loginApi, action.payload);
-    yield put(loginSuccess(user));
+    const user = yield call(loginApi, { email, password });
+    yield put(loginSuccess(user?.data));
+    const result = user.data;
+ 
+    if(result.success){
+      api.setLoggedInUser(user.data.data);
+      setAuthorization(user.data.data.access);
+  }
+
   } catch (error) {
-    yield put(loginFailure(error));
+    // yield put(loginFailure(error));
   }
 }
 
 export function* watchLogin() {
-  yield takeLatest(LOGIN_REQUEST, handleLogin);
+  yield takeEvery(LOGIN_REQUEST, handleLogin);
 }
+
+function* authSaga() {
+  yield all([fork(watchLogin)]);
+}
+
+export default authSaga;

@@ -8,7 +8,7 @@ import { loginRequest } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({ email: 'admin@gmail.com', password: 'admin' });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errors, setErrors] = useState({ email: '', password: '' });
     const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const Login = () => {
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-    console.log(isAuthenticated);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);

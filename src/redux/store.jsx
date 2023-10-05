@@ -2,7 +2,7 @@ import { createStore, applyMiddleware , combineReducers} from 'redux';
 
 import createSagaMiddleware from 'redux-saga';
 import authReducer from './reducers';
-import { watchLogin } from './saga';
+import authSaga from './saga';
 
 
 
@@ -13,6 +13,6 @@ const rootReducer = combineReducers({
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(watchLogin);
+sagaMiddleware.run(authSaga);
 
 export default store;
