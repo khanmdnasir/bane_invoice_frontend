@@ -6,7 +6,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      lineHeight: {
+        'custom': '64px', // You can give it any name you prefer
+      },
+      
+    },
     colors: {
         transparent: 'transparent',
         current: 'currentColor',
@@ -17,8 +22,10 @@ export default {
         emerald: colors.emerald,
         indigo: colors.indigo,
         yellow: colors.yellow,
-        strong_blue:"#0078c8",
-        hover_blue:"#006db7"
+        hover_blue:"#006db7",
+        nav_color: "#0078c8",
+        hoverColor: "#005795",
+        userBgColor: '#fdd580'
     },
 
   },
