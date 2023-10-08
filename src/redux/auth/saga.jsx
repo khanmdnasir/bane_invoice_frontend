@@ -2,8 +2,8 @@
 
 import { put, call, all, takeLatest, takeEvery,fork } from 'redux-saga/effects';
 import { LOGIN_REQUEST, loginSuccess, loginFailure } from './actions';
-import { loginApi } from './loginApi'; 
-import { APICore} from '../helper/AxiosConfig';
+import { loginApi } from '../../helper/LoginApi'; 
+import { APICore} from '../../helper/AxiosConfig';
 
 
 const api = new APICore();

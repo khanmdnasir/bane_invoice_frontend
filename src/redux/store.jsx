@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware , combineReducers} from 'redux';
 
 import createSagaMiddleware from 'redux-saga';
-import authReducer from './reducers';
-import authSaga from './saga';
+import authReducer from '../redux/auth/reducers';
+import authSaga from '../redux/auth/saga';
 
 
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import TextInput from "../components/TextInput";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequest } from "../redux/actions";
+import { loginRequest } from "../redux/auth/actions";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

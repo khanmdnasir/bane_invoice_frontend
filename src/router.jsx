@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "./views/Dashboard";
 import Login from "./views/Login";
-import GuestLayout from "./components/GuestLayout";
-import PrivateLayout from "./components/PrivateLayout";
+import GuestLayout from "./components/Layout/GuestLayout";
+import PrivateLayout from "./components/Layout/PrivateLayout";
 import Contact from "./views/Contact";
 import Invoice from "./views/Invoice";
 import ForgetPassword from "./views/ForgetPassword";
 import PasswordReset from "./views/PasswordReset";
+import Error404Component from "./views/Error404Component";
 
 
 
@@ -49,5 +50,9 @@ import PasswordReset from "./views/PasswordReset";
                     element:<Contact/>
                 },
             ]
-        }  
+        },
+        {
+            path: '*',
+            element: <Error404Component/>
+        }
     ])

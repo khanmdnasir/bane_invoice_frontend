@@ -18,7 +18,18 @@ export default {
         indigo: colors.indigo,
         yellow: colors.yellow,
         strong_blue:"#0078c8",
-        hover_blue:"#006db7"
+        hover_blue:"#006db7",
+        white:"#ffffff",
+        purple: '#3f3cbb',
+        midnight: '#121063',
+        metal: '#565584',
+        tahiti: '#3ab7bf',
+        silver: '#ecebff',
+        bermuda: '#78dcca',
+        blue:{
+          900:"#831843"
+        }
+      
     },
 
   },
