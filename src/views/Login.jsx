@@ -15,7 +15,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+    const error = useSelector((state) => state.auth.error);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -34,7 +34,7 @@ const Login = () => {
             navigate('/dashboard')
         }
     }, [isAuthenticated])
-    
+
     const isValidEmail = (email) => {
         return email.includes('@');
     };
@@ -62,18 +62,22 @@ const Login = () => {
         if (!newErrors.email && !newErrors.password) {
             dispatch(loginRequest(formData));
 
-
         }
 
     };
- 
+
     return (
         <div className="justify-center min-h-screen flex  flex-col items-center">
             <div className="w-80  max-h-max shadow-xl sm:w-96 ">
                 <div className="flex justify-center">
                     <img src={Image} alt="bane-logo" className="w-24 py-12" />
+
                 </div>
+
                 <form className="space-y-4 " onSubmit={handleSubmit}>
+                    <div className="px-4 text-center text-red-400 h-2">
+                        {error && <p className="text-xs">{error}</p>}
+                    </div>
                     <div className="px-4">
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 ">
                             Email Address

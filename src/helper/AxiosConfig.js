@@ -20,7 +20,7 @@ instance.interceptors.response.use(
   (error) => {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     let message;
-    console.log(error);
+
     if (
       error.response.data.code === "token_not_valid" &&
       error.response.status === 401 &&
@@ -85,12 +85,12 @@ instance.interceptors.response.use(
           break;
         default: {
           message =
-            error.response && error.response.data
+            error.response && error.response.data.data.msg
               ? error.response.data["message"]
               : error.message || error;
         }
       }
-      return Promise.reject(message);
+      return Promise.reject(error);
     }
   }
 

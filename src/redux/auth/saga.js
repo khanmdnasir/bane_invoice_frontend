@@ -1,7 +1,7 @@
 // sagas/authSaga.js
 
 import { put, call, all, takeLatest, takeEvery,fork } from 'redux-saga/effects';
-import { LOGIN_REQUEST, loginSuccess, loginFailure } from './actions';
+import { LOGIN_REQUEST, loginSuccess, loginFailure, LOGIN_SUCCESS, LOGIN_FAILURE } from './actions';
 import { loginApi } from '../../helper/LoginApi'; 
 import { APICore} from '../../helper/AxiosConfig';
 
@@ -19,9 +19,9 @@ function* handleLogin({ payload: { email, password }}) {
       api.setLoggedInUser(user.data.data);
       setAuthorization(user.data.data.access);
   }
-
   } catch (error) {
-    // yield put(loginFailure(error));
+    yield put(loginFailure(error.response.data.data.msg));
+
   }
 }
 
