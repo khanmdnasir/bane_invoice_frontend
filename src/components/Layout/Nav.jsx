@@ -9,10 +9,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
-import DropDown from "./DropDown";
-import Search from "./Search";
-import Notification from "./Notification";
-import ProfileDropDown from "./ProfileDropDown";
+import DropDown from "../DropDown";
+import Search from "../Search";
+import Notification from "../Notification";
+import ProfileDropDown from "../ProfileDropDown";
 
 const Nav = () => {
   const [navOpen, setNavOpen] = useState(false);
