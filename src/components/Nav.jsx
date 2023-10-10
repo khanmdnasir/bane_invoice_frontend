@@ -180,7 +180,7 @@ const Nav = () => {
         <div ref={dropdownRef} className="md:hidden">
           <div>
             <button onClick={() => setResponsiveOpen(!responsiveOpen)}>
-              <FontAwesomeIcon className="text-white text-lg" icon={faEllipsisVertical} />
+              <FontAwesomeIcon className="mr-4 px-4 py-2 rounded-full relative hover:bg-hoverColor md:hidden cursor-pointer text-white text-lg" icon={faEllipsisVertical} />
             </button>
             {responsiveOpen && (
               <ul className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute right-2 top-[70px] shadow-lg leading-10 w-60">
