@@ -22,6 +22,7 @@ export default {
         emerald: colors.emerald,
         indigo: colors.indigo,
         yellow: colors.yellow,
+        strong_blue: "#006db7",
         hover_blue:"#006db7",
         nav_color: "#0078c8",
         hoverColor: "#005795",

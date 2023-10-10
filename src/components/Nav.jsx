@@ -4,7 +4,8 @@ import {
   faMagnifyingGlass,
   faBell,
   faCircleQuestion,
-  faBars
+  faEllipsisVertical,
+  faLock
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
@@ -19,6 +20,8 @@ const Nav = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [responsiveOpen, setResponsiveOpen] = useState(false);
+  const [createresOpen, setCreateResOpen] = useState(false);
   const navItems = [
     { name: "dashboard", path: "/", sublinks: [] },
     { name: "invoice", path: "/invoice", sublinks: [] },
@@ -44,10 +47,10 @@ const Nav = () => {
       subpage = "dashboard";
     }
 
-    let classes = "px-3.5 relative";
+    let classes = "md:px-3.5 relative";
     if (type === subpage) {
       classes +=
-        " after:block after:h-0.5 after:bg-gray-300 after:absolute after:top-[39px] after:right-0 after:left-auto after:w-full";
+        " md:after:block md:after:h-0.5 md:after:bg-gray-300 md:after:absolute md:after:top-[39px] md:after:right-0 md:after:left-auto md:after:w-full";
     } else {
       classes += "";
     }
@@ -55,13 +58,17 @@ const Nav = () => {
     return classes;
   }
 
+
   const createButtonRef = useRef();
+  const dropdownRef = useRef();
   const searchButtonRef = useRef();
   const notificationButtonRef = useRef();
   const profileButtonRef = useRef();
   const navButtonRef = useRef();
   useEffect(() => {
     const handleClickOutside = (event) => {
+
+
       if (
         navOpen &&
         navButtonRef.current &&
@@ -69,12 +76,14 @@ const Nav = () => {
       ) {
         setNavOpen(false);
       }
+
       if (
         createOpen &&
         createButtonRef.current &&
         !createButtonRef.current.contains(event.target)
       ) {
         setCreateOpen(false);
+
       }
       if (
         searchOpen &&
@@ -97,6 +106,14 @@ const Nav = () => {
       ) {
         setProfileOpen(false);
       }
+      if (responsiveOpen) {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target)
+        ) {
+          setResponsiveOpen(false);
+        }
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -104,118 +121,40 @@ const Nav = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [navOpen,createOpen, searchOpen, notificationOpen, profileOpen]);
-  // useEffect(() => {
-  //   const createClickOutside1 = (event) => {
-  //     if (
-  //       createOpen &&
-  //       createButtonRef.current &&
-  //       !createButtonRef.current.contains(event.target)
-  //     ) {
-  //       setCreateOpen(false);
-  //     }
-  //   };
+  }, [navOpen, createOpen, searchOpen, notificationOpen, profileOpen, responsiveOpen]);
 
-  //   document.addEventListener("mousedown", createClickOutside1);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", createClickOutside1);
-  //   };
-  // }, [createOpen]);
-
-  // window.addEventListener("click", (e) => {
-  //   if (e.target !== menuRef.current && e.target !== linkRef.current) {
-  //     setNavOpen(false);
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   const searchClickOutside1 = (event) => {
-  //     if (
-  //       searchOpen &&
-  //       searchButtonRef.current &&
-  //       !searchButtonRef.current.contains(event.target)
-  //     ) {
-  //       setSearchOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", searchClickOutside1);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", searchClickOutside1);
-  //   };
-  // }, [searchOpen]);
-
-  // useEffect(() => {
-  //   const notificationClickOutside1 = (event) => {
-  //     if (
-  //       notificationOpen &&
-  //       notificationButtonRef.current &&
-  //       !notificationButtonRef.current.contains(event.target)
-  //     ) {
-  //       setNotificationOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", notificationClickOutside1);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", notificationClickOutside1);
-  //   };
-  // }, [notificationOpen]);
-
-  // useEffect(() => {
-  //   const profileClickOutside1 = (event) => {
-  //     if (
-  //       profileOpen &&
-  //       profileButtonRef.current &&
-  //       !profileButtonRef.current.contains(event.target)
-  //     ) {
-  //       setProfileOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", profileClickOutside1);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", profileClickOutside1);
-  //   };
-  // }, [profileOpen]);
 
   return (
     <div>
       <div className="bg-nav_color flex justify-between items-center h-16 px-4">
-        <DropDown/>
-        
-        <div className="flex grow justify-start text-white font-medium h-16 leading-custom">
+        <DropDown navItems={navItems} />
+
+        <div ref={navButtonRef} className="absolute z-10 left-0 top-[120px] md:top-0 md:relative md:flex md:grow md:justify-start md:text-white md:font-medium md:h-16 md:leading-custom">
           {navItems.map((item, index) => (
-            <div className="hover:bg-hoverColor" key={index}>
+            <div className="hidden md:inline-block md:hover:bg-hoverColor" key={index}>
               {item.sublinks.length > 0 ? (
-                <div className={`hover:bg-hoverColor ${
-                      navOpen ? "bg-hoverColor" : ""
-                    }`}>
+                <div className={`md:hover:bg-hoverColor ${navOpen ? "md:bg-hoverColor" : ""
+                  }`}>
                   <Link
                     key={item.name}
-                    className={`px-3.5 relative hover:bg-hoverColor ${
-                      navOpen ? "bg-hoverColor" : ""
-                    }`}
+                    className={`md:px-3.5 md:relative md:hover:bg-hoverColor ${navOpen ? "md:bg-hoverColor" : ""
+                      }`}
                     to={item.path}
-                    ref={navButtonRef}
+
                     onClick={() => setNavOpen(!navOpen)}
                   >
                     {item.name}
                   </Link>
                   {navOpen && (
                     <ul
-                      className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute left-[357px] top-[70px] shadow-lg leading-10 w-40"
+                      className="md:bg-white md:py-2 md:rounded md:border-2 md:border-solid md:border-gray-300 md:absolute md:left-[187px] md:top-[70px] md:shadow-lg md:leading-10 md:w-40"
                     >
                       {item.sublinks.map((sublink, subindex) => (
                         <li
                           key={subindex}
-                          className="text-black font-normal px-4 hover:bg-gray-200"
+                          className="md:text-black md:font-normal md:px-4 md:hover:bg-gray-200"
                         >
-                          <Link className="text-sm" to={sublink.path}>
+                          <Link className="md:text-sm" to={sublink.path}>
                             {sublink.name}
                           </Link>
                         </li>
@@ -234,64 +173,118 @@ const Nav = () => {
               )}
             </div>
           ))}
-          {/* <Link
-            className={`${ActiveLink("dashboard")} hover:bg-hoverColor`}
-            to="/"
-          >
-            Dashboard
-          </Link>
-          <Link
-            className={`${ActiveLink("invoice")} hover:bg-hoverColor`}
-            to="/invoice"
-          >
-            Invoice
-          </Link> */}
-          {/* <Link
-            className={`px-3.5 relative hover:bg-hoverColor ${
-              navOpen ? "bg-hoverColor" : ""
-            }`}
-            to="#"
-            ref={linkRef}
-            onClick={() => setNavOpen(!navOpen)}
-          >
-            Contact
-          </Link> */}
 
-          {/* {navOpen && (
-            <ul
-              ref={menuRef}
-              className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute left-[357px] top-[70px] shadow-lg leading-10 w-40"
-            >
+        </div>
+
+        {/* For Responsive */}
+        <div ref={dropdownRef} className="md:hidden">
+          <div>
+            <button onClick={() => setResponsiveOpen(!responsiveOpen)}>
+              <FontAwesomeIcon className="text-white text-lg" icon={faEllipsisVertical} />
+            </button>
+            {responsiveOpen && (
+              <ul className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute right-2 top-[70px] shadow-lg leading-10 w-60">
+                <li className="px-4 py-2 text-sm hover:bg-gray-200">
+                  <button onClick={() => { setCreateOpen(!createOpen); setResponsiveOpen(false) }}>
+                    <FontAwesomeIcon className="mr-7 text-gray-600" icon={faPlus} />
+                    Create New
+                  </button>
+                </li>
+                <li className="px-4 py-2 text-sm hover:bg-gray-200">
+                  <button onClick={() => { setSearchOpen(!searchOpen); setResponsiveOpen(false) }}>
+                    <FontAwesomeIcon className="mr-7 text-gray-600" icon={faMagnifyingGlass} />
+                    Search
+                  </button>
+
+                </li>
+                <li className="px-4 py-2 text-sm hover:bg-gray-200">
+                  <button onClick={() => { setNotificationOpen(!notificationOpen); setResponsiveOpen(false) }}>
+                    <FontAwesomeIcon className="mr-7 text-gray-600" icon={faBell} />
+                    Notification
+                  </button>
+
+                </li>
+                <li className="px-4 py-2 text-sm hover:bg-gray-200">
+                  <button>
+                    <FontAwesomeIcon className="mr-7 text-gray-600" icon={faCircleQuestion} />
+                    Help
+                  </button>
+
+                </li>
+                <li className="px-2.5 py-2 text-sm hover:bg-gray-200">
+                  <button onClick={() => { setProfileOpen(!profileOpen); setResponsiveOpen(false) }} className="bg-userBgColor p-1.5 rounded-full mr-4">
+                    <p className="text-black font-medium">AM</p>
+                  </button>
+                  <span>Afroza Mukta</span>
+
+                </li>
+                <hr></hr>
+                <li className='px-4 py-3 text-sm hover:bg-gray-200'>
+                  <Link className='flex items-center' to="#">
+                    <FontAwesomeIcon className='mr-7 text-gray-600' icon={faLock} />
+                    <p>Log out</p>
+                  </Link>
+                </li>
+              </ul>
+            )}
+
+          </div>
+          {createOpen && (
+            <ul ref={createButtonRef} className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute right-2 top-[70px] shadow-lg leading-10 w-48">
+              <li className="text-black text-xs font-normal py-2 px-4 text-gray-500">
+                Create New
+              </li>
               <li className="text-black font-normal px-4 hover:bg-gray-200">
-                <Link className="text-sm" to="#">
-                  All Contacts
+                <Link className="text-sm" to="/invoice">
+                  Invoice
                 </Link>
               </li>
               <li className="text-black font-normal px-4 hover:bg-gray-200">
                 <Link className="text-sm" to="#">
-                  Customers
+                  Bill
                 </Link>
               </li>
               <li className="text-black font-normal px-4 hover:bg-gray-200">
                 <Link className="text-sm" to="#">
-                  Suppliers
+                  Contact
                 </Link>
               </li>
               <li className="text-black font-normal px-4 hover:bg-gray-200">
                 <Link className="text-sm" to="#">
-                  Emloyees
+                  Purchase order
+                </Link>
+              </li>
+              <li className="text-black font-normal px-4 hover:bg-gray-200">
+                <Link className="text-sm" to="#">
+                  Manual journal
                 </Link>
               </li>
             </ul>
-          )} */}
+          )}
+
+          {searchOpen && (
+            <div ref={searchButtonRef} className="bg-gray-100 text-black absolute px-2 py-2 shadow-md rounded w-80 h-fit right-2 top-[70px]">
+              <Search />
+            </div>
+          )}
+
+          {notificationOpen && (
+            <div ref={notificationButtonRef} className="bg-white text-black border-2 border-solid border-gray-300 absolute shadow-md rounded w-96 h-fit right-2 top-[70px]">
+              <Notification setNotificationOpen={setNotificationOpen} />
+            </div>
+          )}
+          {profileOpen && (
+            <div ref={profileButtonRef} className="bg-white text-black border-2 border-solid border-gray-300 absolute shadow-md rounded w-60 h-fit right-2 top-[70px]">
+              <ProfileDropDown />
+            </div>
+          )}
         </div>
-        <div className="flex gap-8 text-white items-center">
-          <div>
+
+        <div className="hidden md:inline-block md:flex gap-8 md:text-white md:items-center">
+          <div ref={createButtonRef}>
             <button
-              ref={createButtonRef}
-              className={`px-3 py-1.5 rounded-full hover:bg-hoverColor ${
-                createOpen ? "bg-hoverColor" : ""
-              }`}
+              className={`px-3 py-1.5 rounded-full hover:bg-hoverColor ${createOpen ? "bg-hoverColor" : ""
+                }`}
               onClick={() => setCreateOpen(!createOpen)}
             >
               <FontAwesomeIcon icon={faPlus} />
@@ -302,7 +295,7 @@ const Nav = () => {
                   Create New
                 </li>
                 <li className="text-black font-normal px-4 hover:bg-gray-200">
-                  <Link className="text-sm" to="#">
+                  <Link className="text-sm" to="/invoice">
                     Invoice
                   </Link>
                 </li>
@@ -329,12 +322,10 @@ const Nav = () => {
               </ul>
             )}
           </div>
-          <div>
+          <div ref={searchButtonRef}>
             <button
-              ref={searchButtonRef}
-              className={`px-3 py-2 rounded-full hover:bg-hoverColor ${
-                searchOpen ? "bg-hoverColor" : ""
-              }`}
+              className={`px-3 py-2 rounded-full hover:bg-hoverColor ${searchOpen ? "bg-hoverColor" : ""
+                }`}
               onClick={() => setSearchOpen(!searchOpen)}
             >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -345,12 +336,11 @@ const Nav = () => {
               </div>
             )}
           </div>
-          <div>
+          <div ref={notificationButtonRef}>
             <button
-              ref={notificationButtonRef}
-              className={`px-3 py-1.5 rounded-full hover:bg-hoverColor ${
-                notificationOpen ? "bg-hoverColor" : ""
-              }`}
+
+              className={`px-3 py-1.5 rounded-full hover:bg-hoverColor ${notificationOpen ? "bg-hoverColor" : ""
+                }`}
               onClick={() => setNotificationOpen(!notificationOpen)}
             >
               <FontAwesomeIcon icon={faBell} />
@@ -366,9 +356,9 @@ const Nav = () => {
               <FontAwesomeIcon icon={faCircleQuestion} />
             </button>
           </div>
-          <div className="bg-userBgColor p-2 rounded-full">
+          <div ref={profileButtonRef} className="bg-userBgColor p-2 rounded-full">
             <button
-              ref={profileButtonRef}
+
               className="rounded-full text-black font-medium"
               onClick={() => setProfileOpen(!profileOpen)}
             >
