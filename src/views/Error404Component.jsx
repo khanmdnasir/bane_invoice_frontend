@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import ErrorLogo from '../assets/error_robot.png'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { APICore } from "../helper/AxiosConfig";
 
 const api = new APICore();
@@ -37,8 +37,9 @@ const Error404Component = () => {
                     <div>
                     </div>
                 </div>
+          
             }
-
+        
         </>
     )
 }

@@ -8,6 +8,7 @@ import Invoice from "./views/Invoice";
 import ForgetPassword from "./views/ForgetPassword";
 import PasswordReset from "./views/PasswordReset";
 import Error404Component from "./views/Error404Component";
+import UserSettings from "./views/User/UserSettings";
 
 
 
@@ -49,8 +50,19 @@ import Error404Component from "./views/Error404Component";
                     path:'contact',
                     element:<Contact/>
                 },
+                {
+                    path:'user',
+                    element:<UserSettings/>,
+                    children:[
+                        {
+                            path:'settings',
+                            element: <Contact/>,
+                        },
+                    ]
+                },
             ]
         },
+
         {
             path: '*',
             element: <Error404Component/>
