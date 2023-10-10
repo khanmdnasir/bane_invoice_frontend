@@ -8,7 +8,13 @@ import Invoice from "./views/Invoice";
 import ForgetPassword from "./views/ForgetPassword";
 import PasswordReset from "./views/PasswordReset";
 import Error404Component from "./views/Error404Component";
-import UserSettings from "./views/User/UserSettings";
+import UserSettings from "./views/App/AppSettings";
+import User from "./views/App/User";
+import CompanySettings from "./views/App/CompanySettings";
+import Roles from "./views/App/Roles";
+import Currency from "./views/App/Currency";
+import ChartOfAccount from "./views/App/ChartOfAccount";
+import KeyAccountManager from "./views/App/KeyAccountManager";
 
 
 
@@ -51,12 +57,33 @@ import UserSettings from "./views/User/UserSettings";
                     element:<Contact/>
                 },
                 {
-                    path:'user',
+                    path:'app',
                     element:<UserSettings/>,
                     children:[
                         {
-                            path:'settings',
-                            element: <Contact/>,
+                            path:'company_settings',
+                            element: <CompanySettings/>,
+                        },
+                        {
+                            path:'user',
+                            element: <User/>,
+                        },
+                        {
+                            path:'roles',
+                            element: <Roles/>,
+                        },
+                        {
+                            path:'currency',
+                            element: <Currency/>,
+                        },
+                      
+                        {
+                            path:'chart_of_accounts',
+                            element: <ChartOfAccount/>,
+                        },
+                        {
+                            path:'key_account_manager',
+                            element: <KeyAccountManager/>,
                         },
                     ]
                 },

@@ -10,7 +10,13 @@ export default {
       lineHeight: {
         'custom': '64px', // You can give it any name you prefer
       },
-      
+      fontSize:{
+        13:"13px",
+        15:"15px"
+      },
+      boxShadow:{
+        'custom': "0 0 0 1px rgba(0,10,30,.2)"
+      }
     },
     colors: {
         transparent: 'transparent',
@@ -36,8 +42,12 @@ export default {
         },
         nav_color: "#0078c8",
         hoverColor: "#005795",
-        userBgColor: '#fdd580'
+        userBgColor: '#fdd580',
+        deep_gray: "#000a1ebf",
+        navy_blue:"#0078c8",
+        light_blue: "#f2f3f4"
     },
+
 
   },
   plugins: [],
