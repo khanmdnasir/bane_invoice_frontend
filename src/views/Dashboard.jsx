@@ -1,8 +1,11 @@
 import React from "react";
+import Nav from "../components/Layout/Nav";
 
 const Dashboard =()=>{
     return(
-        <div>Dashboard</div>
+        <div>
+           dashboard
+        </div>
     )
 }
 

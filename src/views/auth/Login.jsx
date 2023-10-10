@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import Image from '../assets/banelogo.png'
+import React, { useState, useEffect } from "react";
+import Image from '../../assets/images/banelogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import TextInput from "../components/TextInput";
+import TextInput from "../../components/TextInput";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest } from "../../redux/auth/actions";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({ email: 'admin@gmail.com', password: 'admin' });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errors, setErrors] = useState({ email: '', password: '' });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const error = useSelector((state) => state.auth.error);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -21,9 +29,16 @@ const Login = () => {
         });
     };
 
+    useEffect(() => {
+        if (isAuthenticated == true) {
+            navigate('/dashboard')
+        }
+    }, [isAuthenticated])
+
     const isValidEmail = (email) => {
         return email.includes('@');
     };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -45,8 +60,10 @@ const Login = () => {
         setErrors(newErrors);
 
         if (!newErrors.email && !newErrors.password) {
-            console.log('Form data to be sent:', formData);
+            dispatch(loginRequest(formData));
+
         }
+
     };
 
     return (
@@ -54,14 +71,18 @@ const Login = () => {
             <div className="w-80  max-h-max shadow-xl sm:w-96 ">
                 <div className="flex justify-center">
                     <img src={Image} alt="bane-logo" className="w-24 py-12" />
+
                 </div>
+
                 <form className="space-y-4 " onSubmit={handleSubmit}>
+                    <div className="px-4 text-center text-red-400 h-2">
+                        {error && <p className="text-xs">{error}</p>}
+                    </div>
                     <div className="px-4">
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 ">
                             Email Address
                         </label>
                         <div className="mt-2">
-                            {/* Use the TextInput component */}
                             <TextInput
                                 type="email"
                                 name="email"
