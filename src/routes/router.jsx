@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "./views/Dashboard";
-import Login from "./views/Login";
-import GuestLayout from "./components/Layout/GuestLayout";
-import PrivateLayout from "./components/Layout/PrivateLayout";
-import Contact from "./views/Contact";
-import Invoice from "./views/Invoice";
-import ForgetPassword from "./views/ForgetPassword";
-import PasswordReset from "./views/PasswordReset";
-import Error404Component from "./views/Error404Component";
+import Dashboard from "../views/Dashboard";
+import Contact from "../views/Contact";
+import Invoice from "../views/Invoice";
+import Error404Component from "../views/error/Error404Component";
+import Login from "../views/auth/Login";
+import ForgetPassword from "../views/auth/ForgetPassword";
+import PasswordReset from "../views/auth/PasswordReset";
+import GuestLayout from "./GuestLayout";
+import PrivateLayout from "./PrivateLayout";
+
 
 
 

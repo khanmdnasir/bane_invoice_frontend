@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { APICore } from "../../helper/AxiosConfig";
+import { APICore } from "../helper/AxiosConfig";
 
 const api = new APICore();
 
