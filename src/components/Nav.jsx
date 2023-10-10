@@ -5,8 +5,9 @@ import {
   faBell,
   faCircleQuestion,
   faEllipsisVertical,
-  faLock
+  faLock,faCog
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
 import DropDown from "./DropDown";
@@ -352,9 +353,11 @@ const Nav = () => {
             )}
           </div>
           <div>
-            <button>
-              <FontAwesomeIcon icon={faCircleQuestion} />
+           <Link to='/app'>
+           <button>
+              <FontAwesomeIcon icon={faCog} />
             </button>
+           </Link>
           </div>
           <div ref={profileButtonRef} className="bg-userBgColor p-2 rounded-full">
             <button
