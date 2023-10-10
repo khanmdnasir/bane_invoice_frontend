@@ -6,7 +6,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      lineHeight: {
+        'custom': '64px', // You can give it any name you prefer
+      },
+      
+    },
     colors: {
         transparent: 'transparent',
         current: 'currentColor',
@@ -28,8 +33,10 @@ export default {
         bermuda: '#78dcca',
         blue:{
           900:"#831843"
-        }
-      
+        },
+        nav_color: "#0078c8",
+        hoverColor: "#005795",
+        userBgColor: '#fdd580'
     },
 
   },
