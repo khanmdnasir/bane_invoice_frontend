@@ -5,8 +5,9 @@ import {
   faBell,
   faCircleQuestion,
   faEllipsisVertical,
-  faLock
+  faLock,faCog
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
 import DropDown from "../DropDown";
@@ -280,7 +281,11 @@ const Nav = () => {
           )}
         </div>
 
+<<<<<<< HEAD:src/components/Layout/Nav.jsx
         <div className="hidden md:flex gap-8 md:text-white md:items-center">
+=======
+        <div className="hidden  md:flex gap-8 md:text-white md:items-center">
+>>>>>>> origin/feature/user_module:src/components/Nav.jsx
           <div ref={createButtonRef}>
             <button
               className={`px-3 py-1.5 rounded-full hover:bg-hoverColor ${createOpen ? "bg-hoverColor" : ""
@@ -291,7 +296,7 @@ const Nav = () => {
             </button>
             {createOpen && (
               <ul className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute right-[200px] top-[70px] shadow-lg leading-10 w-48">
-                <li className="text-black text-xs font-normal py-2 px-4 text-gray-500">
+                <li className=" text-xs font-normal py-2 px-4 text-gray-500">
                   Create New
                 </li>
                 <li className="text-black font-normal px-4 hover:bg-gray-200">
@@ -352,9 +357,11 @@ const Nav = () => {
             )}
           </div>
           <div>
-            <button>
-              <FontAwesomeIcon icon={faCircleQuestion} />
+           <Link to='/app'>
+           <button>
+              <FontAwesomeIcon icon={faCog} />
             </button>
+           </Link>
           </div>
           <div ref={profileButtonRef} className="bg-userBgColor p-2 rounded-full">
             <button
