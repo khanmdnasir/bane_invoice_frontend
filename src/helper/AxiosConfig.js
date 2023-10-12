@@ -85,9 +85,9 @@ instance.interceptors.response.use(
           break;
         default: {
           message =
-            error.response && error.response.data.data.msg
-              ? error.response.data["message"]
-              : error.message || error;
+            error?.response && error?.response?.data?.data?.msg
+              ? error?.response?.data["message"]
+              : error?.message || error;
         }
       }
       return Promise.reject(error);

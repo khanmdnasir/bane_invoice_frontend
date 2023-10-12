@@ -4,22 +4,37 @@ import TextInput from "../../components/TextInput";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import instance from '../../helper/AxiosConfig';
 
 const PasswordReset = () => {
   const location = useLocation();
-  const data = location.state;
+  // const data = location.state;
+
   const [forgotPasswordData, setForgotPasswordData] = useState({
-    email: data.email,
+    email: "afroza@aslgroup.com.bd",
     new_password: "",
     confirm_password: "",
   });
-
+  const [submitSuccess, setSubmitSuccess] = useState("");
+  const [tokenExpired, setTokenExpired] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({
     new_password: "",
     confirm_password: "",
   });
+  const searchParams = new URLSearchParams(location.search);// for get token by url
+  const token = searchParams.get("token");
+
+  useEffect(() => {
+    // Set a timeout to clear the token expiration message after 1 min
+    const tokenExpirationTimeout = setTimeout(() => {
+      setTokenExpired(true);
+    }, 60000);
+
+    return () => clearTimeout(tokenExpirationTimeout); // Cleanup the timer on unmount
+  }, [tokenExpired]);
 
   //Set Form Data
   const handleChange = (e) => {
@@ -39,11 +54,22 @@ const PasswordReset = () => {
   // Form Submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if (tokenExpired) {
+    //   setSubmitError(!tokenExpired);
+    //   return;
+    // }
 
     const passwordErrors = { new_password: "", confirm_password: "" };
+    const isPasswordSimilarToEmail = forgotPasswordData.email.includes(forgotPasswordData.new_password);
+
 
     if (!forgotPasswordData.new_password) {
       passwordErrors.new_password = "New Password is required";
+    } else if (isPasswordSimilarToEmail) {
+      passwordErrors.new_password = "Password is too similar to the username.";
+    } else if (forgotPasswordData.new_password.length < 8) {
+      passwordErrors.new_password =
+        "This password is too short. It must contain at least 8 characters.";
     }
 
     if (!forgotPasswordData.confirm_password) {
@@ -58,10 +84,30 @@ const PasswordReset = () => {
 
     if (!passwordErrors.new_password && !passwordErrors.confirm_password) {
       const data = {
-        email: forgotPasswordData.email,
         password: forgotPasswordData.new_password,
+        token: token,
       };
-      console.log("Form submitted successfully", data);
+
+      try {
+
+        instance.post("/password_reset/confirm/", data)
+          .then((response) => {
+            console.log("Password reset successful", response.data);
+            setSubmitSuccess("Password reset successful");
+            setTokenExpired(false);
+          })
+          .catch((error) => {
+
+            setSubmitError("Password reset failed");
+
+            setTokenExpired(false);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      // console.log("Form submitted successfully", data);
+
+
       // Reset the password fields
       setForgotPasswordData({
         ...forgotPasswordData,
@@ -78,7 +124,8 @@ const PasswordReset = () => {
           <img src={Image} alt="bane-logo" className="w-24 py-12" />
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="px-4">
+          {/* <div className="px-4">
+          
             <label
               htmlFor="email"
               className="block text-sm font-medium leading-6"
@@ -95,8 +142,20 @@ const PasswordReset = () => {
                 readOnly={true}
               />
             </div>
-          </div>
+          </div> */}
           <div className="px-4">
+            {/* {tokenExpired ? (
+  <p className="text-red-500 text-sm mb-6">{tokenExpired}</p>
+) : (
+  <p className="text-red-500 text-sm mb-6">{submitError}</p>
+)} */}
+            {tokenExpired ? <p className="text-red-500 text-sm mb-6">Token has expired. Please request a new password reset link.</p> : null}
+            {submitError && !tokenExpired ? (
+              <p className="text-red-500 text-sm mb-6">{submitError}</p>
+            ) : null}
+            {submitSuccess && (
+              <p className="text-strong_blue text-sm mb-6">{submitSuccess}</p>
+            )}
             <label
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900 "
@@ -152,6 +211,7 @@ const PasswordReset = () => {
           <div>
             <button
               type="submit"
+              disabled={tokenExpired}
               className="flex w-full justify-center rounded-b-lg  bg-strong_blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-hover_blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Submit

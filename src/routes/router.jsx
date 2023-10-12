@@ -27,7 +27,7 @@ import PrivateLayout from "./PrivateLayout";
                     element: <ForgetPassword/>
                 },
                 {
-                    path:'passwordreset',
+                    path:'password_reset',
                     element: <PasswordReset/>
                 },
             ]

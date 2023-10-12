@@ -1,7 +1,7 @@
 // sagas/authSaga.js
 
 import { put, call, all, takeLatest, takeEvery,fork } from 'redux-saga/effects';
-import { LOGIN_REQUEST, loginSuccess, loginFailure, LOGIN_SUCCESS, LOGIN_FAILURE } from './actions';
+import { LOGIN_REQUEST, loginSuccess, loginFailure, } from './actions';
 import { loginApi } from '../../helper/LoginApi'; 
 import { APICore} from '../../helper/AxiosConfig';
 
@@ -24,6 +24,7 @@ function* handleLogin({ payload: { email, password }}) {
 
   }
 }
+
 
 export function* watchLogin() {
   yield takeEvery(LOGIN_REQUEST, handleLogin);
