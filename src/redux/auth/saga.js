@@ -3,7 +3,8 @@
 import { put, call, all, takeLatest, takeEvery,fork } from 'redux-saga/effects';
 import { LOGIN_REQUEST, loginSuccess, loginFailure, LOGIN_SUCCESS, LOGIN_FAILURE } from './actions';
 import { loginApi } from '../../helper/LoginApi'; 
-import { APICore} from '../../helper/AxiosConfig';
+import { APICore, setAuthorization} from '../../helper/AxiosConfig';
+
 
 
 const api = new APICore();

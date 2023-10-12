@@ -6,6 +6,7 @@ const api = new APICore();
 
 const GuestLayout = () => {
     const navigate = useNavigate();
+  
 
     useEffect(() => {
         const isAuthenticated = api.isUserAuthenticated();
@@ -14,6 +15,8 @@ const GuestLayout = () => {
         }
 
     }, [navigate]);
+
+
 
 
     return (

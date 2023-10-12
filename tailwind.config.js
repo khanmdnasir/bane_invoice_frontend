@@ -14,8 +14,12 @@ export default {
         13:"13px",
         15:"15px"
       },
+      border:{
+      1:"1px"
+      },
       boxShadow:{
-        'custom': "0 0 0 1px rgba(0,10,30,.2)"
+        'custom': "0 0 0 1px rgba(0,10,30,.2)",
+        'border':"0 -1px 0 0 rgba(0,10,30,.2)"
       }
     },
     colors: {
@@ -45,7 +49,12 @@ export default {
         userBgColor: '#fdd580',
         deep_gray: "#000a1ebf",
         navy_blue:"#0078c8",
-        light_blue: "#f2f3f4"
+        light_blue: "#f2f3f4",
+        plum:"#daa3e4",
+        light_blue: "#f2f3f4",
+        table_border:"#000a1e33",
+        blue_charcoal: "#000A1E",
+        spanish_green: "#00823c"
     },
 
 

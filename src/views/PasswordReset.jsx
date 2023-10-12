@@ -26,7 +26,7 @@ const PasswordReset = () => {
                 id="email"
                 type="email"
                 name="email"
-                value={email.email}
+                // value={email.email}
                 disabled
               />
             </div>

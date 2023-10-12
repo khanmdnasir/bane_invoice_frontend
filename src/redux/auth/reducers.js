@@ -16,8 +16,9 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+   
     case 'LOGIN_SUCCESS':
-      return {
+    return {
         ...state,
         isAuthenticated: true,
         accessToken: action?.payload?.data?.access,

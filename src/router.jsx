@@ -15,6 +15,7 @@ import Roles from "./views/App/Roles";
 import Currency from "./views/App/Currency";
 import ChartOfAccount from "./views/App/ChartOfAccount";
 import KeyAccountManager from "./views/App/KeyAccountManager";
+import AddNewUser from "./views/App/AddNewUser";
 
 
 
@@ -33,13 +34,14 @@ import KeyAccountManager from "./views/App/KeyAccountManager";
                     element: <ForgetPassword/>
                 },
                 {
-                    path:'passwordreset',
+                    path:'password_reset',
                     element: <PasswordReset/>
                 },
+           
             ]
         },
 
-    
+  
         {
             path:'/',
             element:<PrivateLayout/>,
@@ -67,6 +69,12 @@ import KeyAccountManager from "./views/App/KeyAccountManager";
                         {
                             path:'user',
                             element: <User/>,
+                            children:[
+                                {
+                                    path:'add_new_user',
+                                    element: <AddNewUser/>, 
+                                }
+                            ]
                         },
                         {
                             path:'roles',

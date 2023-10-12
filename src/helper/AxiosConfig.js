@@ -6,10 +6,11 @@ import config from '../../config';
 let authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null;
 
 const instance = axios.create({
-  baseURL: `${config.API_URL}/api`,
+  baseURL: `${config.API_URL}/api/`,
   // headers:{Authorization:`Bearer ${authTokens?.access}`}
 });
 
+axios.defaults.baseURL = config.API_URL;
 instance.interceptors.response.use(
 
   function (response) {
@@ -97,10 +98,11 @@ instance.interceptors.response.use(
 );
 const AUTH_TOKEN_KEY = "bane_user";
 
- const setAuthorization = (token ) => {
+export const setAuthorization = (token ) => {
   if (token) axios.defaults.headers.common["Authorization"] = "Bearer " + token;
   else delete axios.defaults.headers.common["Authorization"];
 };
+
 const getUserFromCookie = () => {
   const token = localStorage.getItem(AUTH_TOKEN_KEY);
 
@@ -113,6 +115,7 @@ export class APICore {
    * Fetches data from given url
    */
   get = (url, params) => {
+  
     let response;
     if (params) {
       var queryString = params
