@@ -25,7 +25,7 @@ const ForgetPassword = () => {
 
       instance.post(`/password_reset/`, { email })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
          
           // navigateTo(`/login/password_reset`, { state: { email: email } });
           setSubmitSuccess("We sent a password reset link to your email. Check your email.")

@@ -9,6 +9,8 @@ import instance from '../../helper/AxiosConfig';
 const PasswordReset = () => {
   const location = useLocation();
   // const data = location.state;
+  const searchParams = new URLSearchParams(location.search);// for get token by url
+  const token = searchParams.get("token");
 
   const [forgotPasswordData, setForgotPasswordData] = useState({
     email: "afroza@aslgroup.com.bd",
@@ -21,11 +23,10 @@ const PasswordReset = () => {
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({
+
     new_password: "",
     confirm_password: "",
   });
-  const searchParams = new URLSearchParams(location.search);// for get token by url
-  const token = searchParams.get("token");
 
   useEffect(() => {
     // Set a timeout to clear the token expiration message after 1 min
@@ -144,11 +145,6 @@ const PasswordReset = () => {
             </div>
           </div> */}
           <div className="px-4">
-            {/* {tokenExpired ? (
-  <p className="text-red-500 text-sm mb-6">{tokenExpired}</p>
-) : (
-  <p className="text-red-500 text-sm mb-6">{submitError}</p>
-)} */}
             {tokenExpired ? <p className="text-red-500 text-sm mb-6">Token has expired. Please request a new password reset link.</p> : null}
             {submitError && !tokenExpired ? (
               <p className="text-red-500 text-sm mb-6">{submitError}</p>
