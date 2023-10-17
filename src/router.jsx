@@ -16,6 +16,7 @@ import Currency from "./views/App/Currency";
 import ChartOfAccount from "./views/App/ChartOfAccount";
 import KeyAccountManager from "./views/App/KeyAccountManager";
 import AddNewUser from "./views/App/AddNewUser";
+import UserDetails from "./views/App/UserDetail";
 
 
 
@@ -73,6 +74,10 @@ import AddNewUser from "./views/App/AddNewUser";
                                 {
                                     path:'add_new_user',
                                     element: <AddNewUser/>, 
+                                },
+                                {
+                                    path:'user_details',
+                                    element: <UserDetails/>, 
                                 }
                             ]
                         },

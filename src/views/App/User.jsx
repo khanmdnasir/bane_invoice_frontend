@@ -3,21 +3,22 @@ import { useSelector } from "react-redux";
 import { getUser } from "../../redux/user/actions";
 import { useDispatch } from "react-redux";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import UserDetails from "./UserDetail";
+
 
 const User = () => {
     const path = useLocation();
     const [searchQuery, setSearchQuery] = useState('');
+    const [viewButton, setViewButton] = useState('')
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.users);
 
 
-
-    console.log(path);
     useEffect(() => {
         dispatch(getUser());
     }, []);
-
-    const user = useSelector((state) => state.user.users);
-    console.log(user)
 
     const timeStampToDate = (timestamp) => {
         let dateObject = new Date(timestamp);
@@ -38,10 +39,11 @@ const User = () => {
 
     // Filter the users based on the search query
     const filteredUsers = user.filter((user, key) =>
-        `${user.first_name} ${user.last_name} ${user.email} ${user.groups[0]?.name} ${user.name} ${user.phone}`
+        `$ ${user.first_name} ${user.last_name} ${user.email} ${user.groups[0]?.name} ${user.name} ${user.phone}`
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
     );
+
 
 
     return (
@@ -52,9 +54,9 @@ const User = () => {
                         <div className="">
                             <div className="py-4 px-4 flex justify-between  ">
                                 <span className="text-15 font-semibold mr-4 ">Current Users {user.length}</span>
-                               <Link to='add_new_user'>
-                               <button className="text-white bg-spanish_green p-2 rounded text-13">Add New User</button>
-                               </Link>
+                                <Link to='add_new_user'>
+                                    <button className="text-white bg-spanish_green p-2 rounded text-13">Add New User</button>
+                                </Link>
                             </div>
                             <hr className="mb-2" />
                             <div className="px-4 mb-4 ">
@@ -67,9 +69,9 @@ const User = () => {
                                 />
                             </div>
                         </div>
-                        {filteredUsers.map((item, key) => {
+                        {filteredUsers.map((item) => {
                             return (
-                                <div className="shadow-border  ">
+                                <div className="shadow-border" key={item.id}>
                                     <div className="p-2 h-20 sm:h-16  sm:flex justify-between">
                                         <div className="flex px-2 ">
                                             <div className=" ">
@@ -111,7 +113,7 @@ const User = () => {
                                                     <li>
                                                         <h6>{item.name}</h6>
                                                     </li>
-                                                    <li >
+                                                    <li className="text-xs sm:text-base md:text-13 mr-2 pt-1.5 sm:pt-0" >
                                                         <h6>{item.phone}</h6>
                                                     </li>
                                                     <li className="text-13 pt-1">
@@ -120,11 +122,27 @@ const User = () => {
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div className="self-center px-8  text-xs sm:text-base md:text-15 text-blue_charcoal ml-6 sm:ml-0">
+                                        <div className="self-center flex px-8 justify-between text-xs sm:text-base md:text-15 text-blue_charcoal ml-6 sm:ml-0">
                                             <h6 >
                                                 Logged in {timeStampToMinute(item.last_login === null ? "0" : item.last_login)}
                                                 {" " + "minutes ago"}
                                             </h6>
+                                            <div className="">
+                                                <span className="align-baseline ml-2 absolute">
+                                                    <FontAwesomeIcon icon={faEllipsisVertical} onClick={() => setViewButton(item.id)} className="" />
+                                                    {viewButton === item.id ?
+                                                        <div className="relative bottom-1 right-3 border bg-white rounded text-black">
+                                                            <Link to='/app/user/user_details'
+                                                                state={{ "user_details": item }} 
+                                                              >
+                                                                <button className="px-4 ">View</button>
+                                                            </Link>
+
+                                                        </div> : ''}
+                                                </span>
+
+                                            </div>
+
 
                                         </div>
 
@@ -134,7 +152,7 @@ const User = () => {
                         })}</div> : <Outlet />
             }
         </>
-    
+
     )
 }
 

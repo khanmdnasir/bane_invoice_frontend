@@ -2,6 +2,7 @@ import * as type from "./types";
 
 
 export const getUser = (limit, page) => ({
+ 
   type: type.GET_USER_REQUESTED,
   payload: {limit, page},
 });
@@ -12,7 +13,8 @@ export const getUserDetails = (id) =>{
   payload: id,
 });}
 
-export const addUser = (formData) => ({
+export const addUser = (formData) => (
+  {
   type: type.ADD_USER_REQUESTED,
   payload: formData,
 });

@@ -1,9 +1,3 @@
-
-// Assuming the TypeScript code is in a file named userApi.ts
-
-// Import APICore from the compiled JavaScript file
-// const { APICore } = require('./apiCore');
-
 import { APICore } from "./AxiosConfig";
 
 
@@ -21,6 +15,7 @@ export function getUserDetails(params) {
 }
 
 export function addUser(params) {
-    const baseUrl = '/users/';
+    console.log("PArams", params);
+    const baseUrl = 'api/users/';
     return api.create(`${baseUrl}`, params);
 }

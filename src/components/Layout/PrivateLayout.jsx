@@ -22,7 +22,7 @@ const PrivateLayout = () => {
    
 
     return (
-        <div className="bg-light_blue min-h-screen">
+        <div className="bg-light_blue min-h-screen max-h-full">
             <Nav/>
             {api.isUserAuthenticated() && <Outlet />}
         </div>
