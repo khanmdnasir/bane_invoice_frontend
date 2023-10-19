@@ -166,7 +166,7 @@ const Nav = () => {
               ) : (
                 <Link
                   key={item.name}
-                  className={`${ActiveLink(item.name)}`}
+                  className={`capitalize ${ActiveLink(item.name)}`}
                   to={item.path}
                 >
                   {item.name}

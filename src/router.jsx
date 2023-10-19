@@ -16,6 +16,9 @@ import Currency from "./views/App/Currency";
 import ChartOfAccount from "./views/App/ChartOfAccount";
 import KeyAccountManager from "./views/App/KeyAccountManager";
 import AddNewUser from "./views/App/AddNewUser";
+import EditRole from "./views/App/EditRole";
+import AddRole from "./views/App/AddRole";
+
 
 
 
@@ -79,6 +82,14 @@ import AddNewUser from "./views/App/AddNewUser";
                         {
                             path:'roles',
                             element: <Roles/>,
+                        },
+                        {
+                            path:'edit_role',
+                            element: <EditRole/>,
+                        },
+                        {
+                            path:'add_role',
+                            element: <AddRole/>,
                         },
                         {
                             path:'currency',

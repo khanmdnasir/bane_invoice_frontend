@@ -5,12 +5,14 @@ import authReducer from './auth/reducers';
 
 import rootSaga from './saga';
 import User from './user/reducers';
+import Role from './role/reducers';
 
 
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  user: User
+  user: User,
+  role: Role
 });
 
 const sagaMiddleware = createSagaMiddleware();
