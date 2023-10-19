@@ -14,8 +14,7 @@ const User = () => {
     const [viewButton, setViewButton] = useState('')
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.users);
-
-
+  
     useEffect(() => {
         dispatch(getUser());
     }, []);
@@ -133,8 +132,8 @@ const User = () => {
                                                     {viewButton === item.id ?
                                                         <div className="relative bottom-1 right-3 border bg-white rounded text-black">
                                                             <Link to='/app/user/user_details'
-                                                                state={{ "user_details": item }} 
-                                                              >
+                                                                state={{ "user_details": item }}
+                                                            >
                                                                 <button className="px-4 ">View</button>
                                                             </Link>
 

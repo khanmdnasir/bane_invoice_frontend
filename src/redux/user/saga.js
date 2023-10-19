@@ -37,21 +37,21 @@ function* getUserDetails(payload) {
 }
 
 function* addUser(formData) {
-    console.log("Form Data",formData.payload);
+
     try {
  
         const response = yield call(addUserApi, formData.payload);
-
         const result = response.data;
 
         if (result.success) {
-            yield put({ type: 'ADD_USER_SUCCESS', user: result.data });
+            yield put({ type: 'ADD_USER_SUCCESS', user: result });
         } else {
+      
             yield put({ type: 'ADD_USER_FAILED', error: result.error });
         }
 
     } catch (error) {
-        yield put({ type: 'ADD_USER_FAILED', error: error });
+        yield put({ type: 'ADD_USER_FAILED', error: error.response.data.data });
     }
 }
 

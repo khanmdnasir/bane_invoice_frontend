@@ -15,7 +15,7 @@ export function getUserDetails(params) {
 }
 
 export function addUser(params) {
-    console.log("PArams", params);
+
     const baseUrl = 'api/users/';
     return api.create(`${baseUrl}`, params);
 }

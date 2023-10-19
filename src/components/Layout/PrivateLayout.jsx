@@ -4,6 +4,7 @@ import { APICore } from "../../helper/AxiosConfig";
 import Nav from "../Nav";
 
 
+
 const api = new APICore();
 
 const PrivateLayout = () => {
@@ -22,7 +23,7 @@ const PrivateLayout = () => {
    
 
     return (
-        <div className="bg-light_blue min-h-screen max-h-full">
+        <div className="bg-light_blue min-h-screen max-h-full ">
             <Nav/>
             {api.isUserAuthenticated() && <Outlet />}
         </div>

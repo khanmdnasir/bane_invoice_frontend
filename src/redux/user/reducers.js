@@ -21,14 +21,14 @@ const INIT_STATE = {
 const User = (state = INIT_STATE, action) => {
     switch (action.type) {
         case type.GET_USER_REQUESTED: {
-          
+
             return {
                 ...state,
                 loading: true,
             };
         }
         case type.GET_USER_SUCCESS: {
-        
+
             return {
                 ...state,
                 loading: false,
@@ -42,6 +42,7 @@ const User = (state = INIT_STATE, action) => {
             };
         }
         case type.GET_USER_FAILED: {
+
             return {
                 ...state,
                 loading: false,
@@ -66,6 +67,7 @@ const User = (state = INIT_STATE, action) => {
             };
         }
         case type.GET_USER_DETAILS_FAILED: {
+
             return {
                 ...state,
                 loading: false,
@@ -74,22 +76,26 @@ const User = (state = INIT_STATE, action) => {
         }
 
         case type.ADD_USER_REQUESTED: {
+
             return {
                 ...state,
                 loading: true,
             };
         }
         case type.ADD_USER_SUCCESS: {
+           
             return {
                 ...state,
                 loading: false,
                 success: 'User created successfully',
-                users: [...state.users, action.user],
-                create_users: action.user
+                users: [...state.users, action.user.data],
+                create_users: action.user,
+               
 
             };
         }
         case type.ADD_USER_FAILED: {
+
             return {
                 ...state,
                 loading: false,
@@ -99,6 +105,8 @@ const User = (state = INIT_STATE, action) => {
 
         case type.SET_USER_SUCCESS_ALERT: {
             // console.log('reducer',action)
+            console.log(action.payload);
+
             return {
                 ...state,
                 success: action.payload,
@@ -107,6 +115,7 @@ const User = (state = INIT_STATE, action) => {
 
         case type.SET_USER_ERROR_ALERT: {
             // console.log('reducer error',action)
+
             return {
                 ...state,
                 error: action.payload,
