@@ -1,9 +1,11 @@
 // axiosConfig.js
 
-import axios from 'axios';
-import config from '../../config';
+import axios from "axios";
+import config from "../../config";
 
-let authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null;
+let authTokens = localStorage.getItem("authTokens")
+  ? JSON.parse(localStorage.getItem("authTokens"))
+  : null;
 
 const instance = axios.create({
   baseURL: `${config.API_URL}/api/`,
@@ -12,12 +14,10 @@ const instance = axios.create({
 
 axios.defaults.baseURL = config.API_URL;
 instance.interceptors.response.use(
-
   function (response) {
     // console.log('Response received with data:', response);
     return response;
-  }
-  ,
+  },
   (error) => {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     let message;
@@ -42,16 +42,11 @@ instance.interceptors.response.use(
           return axios
             .post("/api/auth/", { refresh: refreshToken })
             .then((response) => {
-
               const newUpdateUserInfo = {
                 ...userInfo,
                 access: response.data.data.access,
-
               };
-              localStorage.setItem(
-                "bane",
-                JSON.stringify(newUpdateUserInfo)
-              );
+              localStorage.setItem("bane", JSON.stringify(newUpdateUserInfo));
 
               axios.defaults.headers.common["Authorization"] =
                 "Bearer " + response.data.data.access;
@@ -94,11 +89,10 @@ instance.interceptors.response.use(
       return Promise.reject(error);
     }
   }
-
 );
 const AUTH_TOKEN_KEY = "bane_user";
 
-export const setAuthorization = (token ) => {
+export const setAuthorization = (token) => {
   if (token) axios.defaults.headers.common["Authorization"] = "Bearer " + token;
   else delete axios.defaults.headers.common["Authorization"];
 };
@@ -109,13 +103,11 @@ const getUserFromCookie = () => {
   return token ? (typeof token == "object" ? token : JSON.parse(token)) : null;
 };
 
-
 export class APICore {
   /**
    * Fetches data from given url
    */
   get = (url, params) => {
-  
     let response;
     if (params) {
       var queryString = params
@@ -239,9 +231,8 @@ export class APICore {
   setLoggedInUser = (user) => {
     if (user) {
       localStorage.setItem(AUTH_TOKEN_KEY, JSON.stringify(user));
-   
     } else {
-      localStorage.removeItem("bane");
+      localStorage.removeItem(AUTH_TOKEN_KEY);
     }
   };
   /**
@@ -262,15 +253,10 @@ export class APICore {
 let user = getUserFromCookie();
 
 if (user) {
-
   const { access } = user;
   if (access) {
     setAuthorization(access);
-    
   }
 }
 
-
 export default instance;
-
-

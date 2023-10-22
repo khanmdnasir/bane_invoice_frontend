@@ -1,8 +1,6 @@
 import { APICore } from "../../helper/AxiosConfig";
 
-
-
-const api = new APICore()
+const api = new APICore();
 
 const initialState = {
   isAuthenticated: false,
@@ -12,13 +10,10 @@ const initialState = {
   refreshToken: null,
 };
 
-
-
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-   
-    case 'LOGIN_SUCCESS':
-    return {
+    case "LOGIN_SUCCESS":
+      return {
         ...state,
         isAuthenticated: true,
         accessToken: action?.payload?.data?.access,
@@ -27,16 +22,14 @@ const authReducer = (state = initialState, action) => {
         error: null,
       };
 
-
-    case 'LOGIN_FAILURE':
-
+    case "LOGIN_FAILURE":
       return {
         ...state,
         isAuthenticated: false,
         user: null,
-        error:action.payload,
+        error: action.payload,
       };
-    case 'LOGOUT':
+    case "LOGOUT_USER":
       return {
         ...state,
         isAuthenticated: false,
@@ -44,7 +37,7 @@ const authReducer = (state = initialState, action) => {
         error: null,
       };
     default:
-      return {...state};
+      return { ...state };
   }
 };
 
