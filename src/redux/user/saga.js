@@ -1,5 +1,5 @@
 import { all, fork, put, takeEvery, call } from 'redux-saga/effects';
-
+import { setError } from '../error/actions';
 
 // helpers
 import {
@@ -8,6 +8,7 @@ import {
     addUser as addUserApi,
 
 } from '../../helper/UserApi';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -45,13 +46,16 @@ function* addUser(formData) {
 
         if (result.success) {
             yield put({ type: 'ADD_USER_SUCCESS', user: result });
-        } else {
+        } 
+        else {
       
             yield put({ type: 'ADD_USER_FAILED', error: result.error });
         }
 
     } catch (error) {
+        
         yield put({ type: 'ADD_USER_FAILED', error: error.response.data.data });
+        yield put(setError({type: "SET_ERROR", error: error.response.data.data}));
     }
 }
 

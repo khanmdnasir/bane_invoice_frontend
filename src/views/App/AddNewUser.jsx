@@ -4,11 +4,13 @@ import { getRoles } from "../../redux/roles/actions";
 import TextInput from "../../components/TextInput";
 import Select from 'react-select'
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../../redux/user/actions";
+import { addUser, setUserErrorAlert, setUserSuccessAlert } from "../../redux/user/actions";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
-import Error from "./Error";
+import Error from "./Alert";
+import { setError } from "../../redux/error/actions";
+
+
 
 const AddNewUser = () => {
     const dispatch = useDispatch();
@@ -19,17 +21,19 @@ const AddNewUser = () => {
         password: 'ghdrghdfh44',
         phone: '+8801687192510',
         groups: null,
-        is_Active: null
+        is_Active: null,
     });
     const [errors, setErrors] = useState('');
     const roles = useSelector(state => state.role.roles);
     const roleOptions = roles.map(role => ({ value: role.id, label: role.name }));
-    const failed = useSelector(state => state.user.error);
-    const success_message = useSelector(state => state.user.success);
+    const loading = useSelector((state) => state.user.loading);
+    const error = useSelector((state) => state.user.error);
+    const success = useSelector((state) => state.user.success);
+    const create_users = useSelector((state) => state.user.create_users);
+    const [disable, setDisable] = useState(false);
+
 
     const navigate = useNavigate();
-
-    console.log(success_message);
 
     useEffect(() => {
         dispatch(getRoles(null, null));
@@ -39,7 +43,7 @@ const AddNewUser = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        console.log("My Event",event.target)
+  
         setFormData({
             ...formData,
             [name]: value,
@@ -72,8 +76,11 @@ const AddNewUser = () => {
                 return;
             }
         }
+   
         dispatch(addUser(formData));
-        // navigate('/app/user')
+        dispatch(setError(error[1].msg));
+
+        navigate('/app/user')
     }
 
 
@@ -81,8 +88,16 @@ const AddNewUser = () => {
     return (
         <>
             <div className="max-w-7xl  w-11/12 py-4  mx-auto mt-8 ">
-                {!failed && <Error error={errors} />}
-                {failed && failed.length > 1 && failed[1] && <Error error={capitalizeFirstLetter(failed[1].msg)} />}
+
+
+                {errors && (
+                    <Error
+                        error={errors}
+                        onClose={() => dispatch(setUserErrorAlert(""))}
+                    // Dispatch an action to clear the error
+                    />
+                )}
+
             </div>
 
             <div className="max-w-7xl  w-11/12 py-4  bg-white mx-auto  border border-red-200 rounded">
