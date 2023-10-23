@@ -1,23 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "./views/Dashboard";
-import Login from "./views/Login";
-import GuestLayout from "./components/Layout/GuestLayout";
-import PrivateLayout from "./components/Layout/PrivateLayout";
-import Contact from "./views/Contact";
-import Invoice from "./views/Invoice";
-import ForgetPassword from "./views/ForgetPassword";
-import PasswordReset from "./views/PasswordReset";
-import Error404Component from "./views/Error404Component";
-import UserSettings from "./views/App/AppSettings";
-import User from "./views/App/User";
-import CompanySettings from "./views/App/CompanySettings";
-import Roles from "./views/App/Roles";
-import Currency from "./views/App/Currency";
-import ChartOfAccount from "./views/App/ChartOfAccount";
-import KeyAccountManager from "./views/App/KeyAccountManager";
-import AddNewUser from "./views/App/AddNewUser";
-import EditRole from "./views/App/EditRole";
-import AddRole from "./views/App/AddRole";
+import Dashboard from "../views/Dashboard";
+import Login from "../views/auth/Login";
+import GuestLayout from "../routes/GuestLayout";
+import PrivateLayout from "../routes/PrivateLayout";
+import Contact from "../views/Contact";
+import Invoice from "../views/Invoice";
+import ForgetPassword from "../views/auth/ForgetPassword";
+import PasswordReset from "../views/auth/PasswordReset";
+import Error404Component from "../views/error/Error404Component";
+import UserSettings from "../views/App/AppSettings";
+import User from "../views/App/User";
+import CompanySettings from "../views/App/CompanySettings";
+import Roles from "../views/App/Roles";
+import Currency from "../views/App/Currency";
+import ChartOfAccount from "../views/App/ChartOfAccount";
+import KeyAccountManager from "../views/App/KeyAccountManager";
+import AddNewUser from "../views/App/AddNewUser";
+import EditRole from "../views/App/EditRole";
+import AddRole from "../views/App/AddRole";
 
 
 

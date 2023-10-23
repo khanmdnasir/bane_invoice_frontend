@@ -7,7 +7,7 @@ import {
   faAngleDown,
   faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
-import Image from "../assets/banelogo.png";
+import Image from "../assets/images/banelogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
 

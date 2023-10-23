@@ -11,12 +11,12 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import DropDown from "./DropDown";
-import Search from "./Search";
-import Notification from "./Notification";
-import ProfileDropDown from "./ProfileDropDown";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../redux/auth/actions";
+import { logoutUser } from "../../redux/auth/actions";
+import DropDown from "../DropDown";
+import Search from "../Search";
+import Notification from "../Notification";
+import ProfileDropDown from "../ProfileDropDown";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -288,11 +288,11 @@ const Nav = () => {
             )}
           </div>
           {createOpen && (
-            <ul
-              ref={createButtonRef}
-              className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute right-2 top-[70px] shadow-lg leading-10 w-48"
-            >
-              <li className=" text-xs font-normal py-2 px-4 text-gray-500">
+
+        
+            <ul ref={createButtonRef} className="bg-white py-2 rounded border-2 border-solid border-gray-300 absolute right-2 top-[70px] shadow-lg leading-10 w-48">
+              <li className="text-xs font-normal py-2 px-4 text-gray-500">
+
                 Create New
               </li>
               <li className="text-black font-normal px-4 hover:bg-gray-200">
@@ -350,8 +350,10 @@ const Nav = () => {
           )}
         </div>
 
-        <div className="hidden md:flex gap-8 md:text-white md:items-center">
-          <div>
+
+
+        <div className="hidden  md:flex gap-8 md:text-white md:items-center">
+          <div ref={createButtonRef}>
             <button
               className={`px-3 py-1.5 rounded-full hover:bg-hoverColor ${
                 createOpen ? "bg-hoverColor" : ""
