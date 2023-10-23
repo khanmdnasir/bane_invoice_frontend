@@ -8,7 +8,7 @@ import { router } from './routes/router'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
+  <Provider store={store} className="bg-gray-600">
       <RouterProvider router={router} />
   </Provider>,
 )

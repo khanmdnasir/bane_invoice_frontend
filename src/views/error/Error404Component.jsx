@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { APICore } from "../../helper/AxiosConfig";
-import ErrorLogo from '../assets/error_robot.png'
+import ErrorLogo from '../../assets/images/error_robot.png'
 import { Link, useNavigate } from "react-router-dom";
 
 const api = new APICore();
