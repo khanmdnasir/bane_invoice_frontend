@@ -8,23 +8,22 @@ import Nav from "../components/Layout/Nav";
 const api = new APICore();
 
 const PrivateLayout = () => {
+
     const navigate = useNavigate();
 
-
+ 
 
     useEffect(() => {
-
         const isAuthenticated = api.isUserAuthenticated();
-
         if (!isAuthenticated) {
             navigate("/login");
         }
-
-    
     }, [navigate]);
 
+   
+
     return (
-        <div>
+        <div className="bg-light_blue min-h-screen">
             <Nav/>
             {api.isUserAuthenticated() && <Outlet />}
         </div>

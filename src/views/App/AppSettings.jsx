@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 const UserSettings = () => {
     const path = useLocation();
-    console.log(path.pathname);
+
     return (
         <>
             {path.pathname === "/app" ?
