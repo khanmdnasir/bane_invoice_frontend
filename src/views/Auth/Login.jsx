@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Image from '../assets/banelogo.png'
+import Image from '../../assets/banelogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import TextInput from "../components/TextInput";
+import TextInput from "../../components/TextInput";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequest } from "../redux/auth/actions";
+import { loginRequest } from "../../redux/auth/actions";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -129,7 +129,7 @@ const Login = () => {
                 </form>
             </div>
             <div className="text-sm flex justify-center mt-4">
-                <a href="login/forgetpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                <a href="/forgetpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Forgot password?
                 </a>
             </div>

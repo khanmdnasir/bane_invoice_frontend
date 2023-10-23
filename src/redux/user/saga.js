@@ -1,5 +1,5 @@
 import { all, fork, put, takeEvery, call } from 'redux-saga/effects';
-import { setError } from '../error/actions';
+import { setError, setSuccess } from '../alert/actions';
 
 // helpers
 import {
@@ -43,13 +43,15 @@ function* addUser(formData) {
  
         const response = yield call(addUserApi, formData.payload);
         const result = response.data;
-
+    
         if (result.success) {
             yield put({ type: 'ADD_USER_SUCCESS', user: result });
+            yield put(setSuccess({type: "SET_SUCCESS", success: [{'msg':'User created successfully'}]}));
+
         } 
         else {
       
-            yield put({ type: 'ADD_USER_FAILED', error: result.error });
+            yield put({ type: 'ADD_USER_FAILED', error: result.data });
         }
 
     } catch (error) {

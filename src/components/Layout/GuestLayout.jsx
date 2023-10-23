@@ -6,6 +6,7 @@ const api = new APICore();
 
 const GuestLayout = () => {
     const navigate = useNavigate();
+    console.log("Public");
   
 
     useEffect(() => {
@@ -15,9 +16,6 @@ const GuestLayout = () => {
         }
 
     }, [navigate]);
-
-
-
 
     return (
         <div>

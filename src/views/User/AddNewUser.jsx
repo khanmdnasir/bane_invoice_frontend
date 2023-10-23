@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, setUserErrorAlert, setUserSuccessAlert } from "../../redux/user/actions";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Error from "./Alert";
-import { setError } from "../../redux/error/actions";
+import Error from "../../components/Alert";
+import { setError, setSuccess } from "../../redux/alert/actions";
+
 
 
 
@@ -31,6 +32,7 @@ const AddNewUser = () => {
     const success = useSelector((state) => state.user.success);
     const create_users = useSelector((state) => state.user.create_users);
     const [disable, setDisable] = useState(false);
+
 
 
     const navigate = useNavigate();
@@ -78,7 +80,7 @@ const AddNewUser = () => {
         }
    
         dispatch(addUser(formData));
-        dispatch(setError(error[1].msg));
+
 
         navigate('/app/user')
     }
@@ -87,7 +89,7 @@ const AddNewUser = () => {
 
     return (
         <>
-            <div className="max-w-7xl  w-11/12 py-4  mx-auto mt-8 ">
+            <div className="max-w-7xl  w-11/12 mb-4  mx-auto mt-4 ">
 
 
                 {errors && (

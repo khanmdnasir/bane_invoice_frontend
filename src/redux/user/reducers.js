@@ -1,5 +1,6 @@
 import * as type from './types';
 
+
 const INIT_STATE = {
     users: [],
     create_users: {},
@@ -16,9 +17,8 @@ const INIT_STATE = {
 
 
 
-
-
 const User = (state = INIT_STATE, action) => {
+   
     switch (action.type) {
         case type.GET_USER_REQUESTED: {
 
@@ -83,16 +83,18 @@ const User = (state = INIT_STATE, action) => {
             };
         }
         case type.ADD_USER_SUCCESS: {
-           
-            return {
+
+            const newState = {
                 ...state,
                 loading: false,
                 success: 'User created successfully',
                 users: [...state.users, action.user.data],
                 create_users: action.user,
-               
-
             };
+
+
+            return newState
+
         }
         case type.ADD_USER_FAILED: {
 

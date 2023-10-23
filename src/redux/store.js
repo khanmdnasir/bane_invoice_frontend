@@ -6,7 +6,7 @@ import authReducer from './auth/reducers';
 import rootSaga from './saga';
 import User from './user/reducers';
 import Role from './roles/reducers';
-import messagesReducer from './error/reducers';
+import messagesReducer from './alert/reducers';
 
 
 
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: User,
   role: Role,
-  message: messagesReducer
+  alert: messagesReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

@@ -49,7 +49,7 @@ const User = () => {
         <>
             {
                 path.pathname === "/app/user" ?
-                    <div className="max-w-7xl w-11/12 bg-white mx-auto my-20 border border-red-200 rounded">
+                    <div className="max-w-7xl w-11/12 bg-white mx-auto my-10 border border-red-200 rounded">
                         <div className="">
                             <div className="py-4 px-4 flex justify-between  ">
                                 <span className="text-15 font-semibold mr-4 ">Current Users {user.length}</span>

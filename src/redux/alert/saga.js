@@ -1,16 +1,16 @@
 import { takeLatest, put } from 'redux-saga/effects';
 
 function* setErrorSaga(action) {
-
-  yield put({ type: 'SET_ERROR_SUCCESS', payload: action.payload.error.msg });
+  console.log(action.payload);
+  yield put({ type: 'SET_ERROR_SUCCESS', payload: action.payload});
 }
 
 function* clearErrorSaga() {
-  yield put({ type: 'CLEAR_ERROR' });
+  yield put({ type: 'CLEAR_ERROR_SUCCESS' });
 }
 
 function* setSuccessSaga(action) {
-  yield put({ type: 'SET_SUCCESS', payload: action.payload });
+  yield put({ type: 'SET_SUCCESS_SUCCESS', payload: action.payload });
 }
 
 function* clearSuccessSaga() {

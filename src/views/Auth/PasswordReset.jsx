@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Image from "../assets/banelogo.png";
-import TextInput from "../components/TextInput";
+import Image from "../../assets/banelogo.png";
+import TextInput from "../../components/TextInput";
 import { useLocation } from "react-router-dom";
 
 const PasswordReset = () => {

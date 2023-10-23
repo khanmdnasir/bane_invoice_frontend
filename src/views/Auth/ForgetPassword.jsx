@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Image from "../assets/banelogo.png";
+import Image from "../../assets/banelogo.png";
 import { Link, useNavigate } from "react-router-dom";
-import TextInput from "../components/TextInput";
+import TextInput from "../../components/TextInput";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
