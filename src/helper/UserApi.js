@@ -15,7 +15,11 @@ export function getUserDetails(params) {
 }
 
 export function addUser(params) {
-
     const baseUrl = 'api/users/';
     return api.create(`${baseUrl}`, params);
+}
+export function updateUser(params) {
+    console.log("My Params",params);
+    const baseUrl = 'api/update_profile/';
+    return api.updatePatch(`${baseUrl}`, params);
 }

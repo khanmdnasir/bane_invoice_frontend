@@ -7,15 +7,12 @@ const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case 'SET_ERROR_SUCCESS':
-
-      return { ...state, error: action.payload };
-    case 'CLEAR_ERROR_SUCCESS':
-      return { ...state, error: null,success:null };
+      return { ...state, error: action.payload, success: null };
     case 'SET_SUCCESS_SUCCESS':
+      return { ...state, success: action.payload, error: null };
+    case 'CLEAR_ERROR_SUCCESS':
+      return { ...state, error: null, success: null };
 
-      return { ...state, success: action.payload};
-    case 'CLEAR_SUCCESS':
-      return { ...state, success: null };
     default:
       return state;
   }

@@ -91,11 +91,16 @@ const User = (state = INIT_STATE, action) => {
                 users: [...state.users, action.user.data],
                 create_users: action.user,
             };
-
-
             return newState
-
         }
+
+        case type.UPDATE_USER_SUCCESS:{
+            return{
+                ...state,
+                users: action.data.data,
+            }
+        }
+
         case type.ADD_USER_FAILED: {
 
             return {

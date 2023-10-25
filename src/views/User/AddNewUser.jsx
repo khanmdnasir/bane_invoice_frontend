@@ -27,13 +27,6 @@ const AddNewUser = () => {
     const [errors, setErrors] = useState('');
     const roles = useSelector(state => state.role.roles);
     const roleOptions = roles.map(role => ({ value: role.id, label: role.name }));
-    const loading = useSelector((state) => state.user.loading);
-    const error = useSelector((state) => state.user.error);
-    const success = useSelector((state) => state.user.success);
-    const create_users = useSelector((state) => state.user.create_users);
-    const [disable, setDisable] = useState(false);
-
-
 
     const navigate = useNavigate();
 
@@ -41,11 +34,9 @@ const AddNewUser = () => {
         dispatch(getRoles(null, null));
     }, [])
 
-
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-  
+
         setFormData({
             ...formData,
             [name]: value,
@@ -64,9 +55,6 @@ const AddNewUser = () => {
             [name]: checked,
         });
     };
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
 
     const excludeValidationFields = ['groups', 'is_Active'];
 
@@ -78,10 +66,7 @@ const AddNewUser = () => {
                 return;
             }
         }
-   
         dispatch(addUser(formData));
-
-
         navigate('/app/user')
     }
 
@@ -96,7 +81,6 @@ const AddNewUser = () => {
                     <Error
                         error={errors}
                         onClose={() => dispatch(setUserErrorAlert(""))}
-                    // Dispatch an action to clear the error
                     />
                 )}
 
@@ -175,11 +159,8 @@ const AddNewUser = () => {
                         <input type="checkbox" name="is_Active" checked={formData.is_Active} onChange={(event) => handleCheckboxChange(event)} />
                     </div>
                     <div className="text-right">
-                        <button type="submit" className="px-4 py-2 bg-gray-600 text-white rounded mr-2">Save</button>
-
-
-
-                        <Link to='/app/user'><button className="px-4 py-2 bg-gray-600 text-white rounded">Cancel</button></Link>
+                        <button type="submit" className="px-8 py-1.5 bg-strong_blue text-white rounded mr-1">Save</button>
+                        <Link to='/app/user'><button className="px-6 py-1.5 bg-gray-400 text-white ml-1 rounded">Cancel</button></Link>
                     </div>
                 </form>
             </div>

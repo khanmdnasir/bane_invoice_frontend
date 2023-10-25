@@ -14,7 +14,7 @@ const User = () => {
     const [viewButton, setViewButton] = useState('')
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.users);
-  
+
     useEffect(() => {
         dispatch(getUser());
     }, []);
@@ -43,8 +43,6 @@ const User = () => {
             .includes(searchQuery.toLowerCase())
     );
 
-
-
     return (
         <>
             {
@@ -68,87 +66,96 @@ const User = () => {
                                 />
                             </div>
                         </div>
-                        {filteredUsers.map((item) => {
-                            return (
-                                <div className="shadow-border" key={item.id}>
-                                    <div className="p-2 h-20 sm:h-16  sm:flex justify-between">
-                                        <div className="flex px-2 ">
-                                            <div className=" ">
-                                                <div className="text-black font-semibold bg-plum md:h-12 md:w-12  h-8 w-8 sm:h-10 sm:w-10 rounded-full mr-4 relative">
-                                                    <span className=" relative top-1 left-2 sm:top-2 md:top-3 md:left-3.5 text-xs sm:text-base md:text-15">
-                                                        {item.first_name.split(" ").map((word, index) => (
-                                                            <span key={index}>
-                                                                {word.charAt(0).toUpperCase()}
-                                                            </span>
-                                                        ))}
-                                                        {item.last_name.split(" ").map((word, index) => (
-                                                            <span key={index}>
-                                                                {word.charAt(0).toUpperCase()}
-                                                            </span>
-                                                        ))}
-                                                    </span>
+                        {filteredUsers.length === 0 ? (
+                            <div className="text-center py-4">
+                                No user Found
+                            </div>
+                        ) : (
+                            filteredUsers.map((item) => {
+
+                                return (
+                                    <div className="shadow-border" key={item.id}>
+                                        <div className="p-2 h-20 sm:h-16  sm:flex justify-between">
+                                            <div className="flex px-2 ">
+                                                <div className=" ">
+                                                    <div className="text-black font-semibold bg-plum md:h-12 md:w-12  h-8 w-8 sm:h-10 sm:w-10 rounded-full mr-4 relative">
+                                                        <span className=" relative top-1 left-2 sm:top-2 md:top-3 md:left-3.5 text-xs sm:text-base md:text-15">
+                                                            {item.first_name.split(" ").map((word, index) => (
+                                                                <span key={index}>
+                                                                    {word.charAt(0).toUpperCase()}
+                                                                </span>
+                                                            ))}
+                                                            {item.last_name.split(" ").map((word, index) => (
+                                                                <span key={index}>
+                                                                    {word.charAt(0).toUpperCase()}
+                                                                </span>
+                                                            ))}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="self-center ">
+                                                    <ul className="flex " >
+                                                        <li className="font-semibold text-xs sm:text-base md:text-15 mr-3">
+                                                            <h5>
+                                                                {item.first_name.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
+                                                                {" " + item.last_name.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
+                                                            </h5>
+                                                        </li>
+                                                        <li className="text-xs sm:text-base md:text-15">
+                                                            <h6>{item.email}</h6>
+                                                        </li>
+                                                    </ul>
+
+                                                    <ul className="flex font-normal" >
+
+                                                        <li className="text-xs pt-1 sm:pt-0 sm:text-base md:text-13 mr-2"><h6>{item?.groups[0]?.name &&
+                                                            item.groups[0].name
+                                                                .split(" ")
+                                                                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                                                .join(" ")}</h6></li>
+                                                        <li>
+                                                            <h6>{item.name}</h6>
+                                                        </li>
+                                                        <li className="text-xs sm:text-base md:text-13 mr-2 pt-1.5 sm:pt-0" >
+                                                            <h6>{item.phone}</h6>
+                                                        </li>
+                                                        <li className="text-13 pt-1">
+                                                            <h6>{timeStampToDate(item.date_joined)}</h6>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <div className="self-center ">
-                                                <ul className="flex " >
-                                                    <li className="font-semibold text-xs sm:text-base md:text-15 mr-3">
-                                                        <h5>
-                                                            {item.first_name.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
-                                                            {" " + item.last_name.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
-                                                        </h5>
-                                                    </li>
-                                                    <li className="text-xs sm:text-base md:text-15">
-                                                        <h6>{item.email}</h6>
-                                                    </li>
-                                                </ul>
+                                            <div className="self-center flex px-8 justify-between text-xs sm:text-base md:text-15 text-blue_charcoal ml-6 sm:ml-0">
+                                                <h6 >
+                                                    Logged in {timeStampToMinute(item.last_login === null ? "0" : item.last_login)}
+                                                    {" " + "minutes ago"}
+                                                </h6>
+                                                <div className="">
+                                                    <span className="align-baseline ml-2 absolute">
+                                                        <FontAwesomeIcon icon={faEllipsisVertical} onClick={() => setViewButton(item.id)} className="" />
+                                                        {viewButton === item.id ?
+                                                            <div className="relative bottom-1 right-3 border bg-white rounded text-black">
+                                                                <Link to='/app/user/user_details'
+                                                                    state={{ "user_details": item }}
+                                                                >
+                                                                    <button className="px-4 ">View</button>
+                                                                </Link>
 
-                                                <ul className="flex font-normal" >
+                                                            </div> : ''}
+                                                    </span>
 
-                                                    <li className="text-xs pt-1 sm:pt-0 sm:text-base md:text-13 mr-2"><h6>{item?.groups[0]?.name &&
-                                                        item.groups[0].name
-                                                            .split(" ")
-                                                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                                            .join(" ")}</h6></li>
-                                                    <li>
-                                                        <h6>{item.name}</h6>
-                                                    </li>
-                                                    <li className="text-xs sm:text-base md:text-13 mr-2 pt-1.5 sm:pt-0" >
-                                                        <h6>{item.phone}</h6>
-                                                    </li>
-                                                    <li className="text-13 pt-1">
-                                                        <h6>{timeStampToDate(item.date_joined)}</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div className="self-center flex px-8 justify-between text-xs sm:text-base md:text-15 text-blue_charcoal ml-6 sm:ml-0">
-                                            <h6 >
-                                                Logged in {timeStampToMinute(item.last_login === null ? "0" : item.last_login)}
-                                                {" " + "minutes ago"}
-                                            </h6>
-                                            <div className="">
-                                                <span className="align-baseline ml-2 absolute">
-                                                    <FontAwesomeIcon icon={faEllipsisVertical} onClick={() => setViewButton(item.id)} className="" />
-                                                    {viewButton === item.id ?
-                                                        <div className="relative bottom-1 right-3 border bg-white rounded text-black">
-                                                            <Link to='/app/user/user_details'
-                                                                state={{ "user_details": item }}
-                                                            >
-                                                                <button className="px-4 ">View</button>
-                                                            </Link>
+                                                </div>
 
-                                                        </div> : ''}
-                                                </span>
 
                                             </div>
 
-
                                         </div>
-
                                     </div>
-                                </div>
-                            );
-                        })}</div> : <Outlet />
+
+                                );
+                            })
+                        )}
+                    </div> : <Outlet />
             }
         </>
 

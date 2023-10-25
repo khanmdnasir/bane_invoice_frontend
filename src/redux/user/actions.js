@@ -28,3 +28,7 @@ export const setUserErrorAlert = (msg) => ({
   type: type.SET_USER_ERROR_ALERT,
   payload: msg,
 });
+export const updateUser = (formData) => ({
+  type: type.UPDATE_USER_REQUESTED,
+  payload: formData,
+});

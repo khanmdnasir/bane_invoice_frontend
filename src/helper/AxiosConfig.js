@@ -69,7 +69,10 @@ instance.interceptors.response.use(
         console.log("Refresh token not available.");
         window.location.href = "/auth/login/";
       }
-    } else if (error && error.response && error.response.status === 404) {
+    }else if (error && error.response && error.response.status === 500) {
+      window.location.href = '/not-found';
+    }
+     else if (error && error.response && error.response.status === 404) {
       // window.location.href = '/not-found';
     } else if (error && error.response && error.response.status === 403) {
       window.location.href = "/access-denied";

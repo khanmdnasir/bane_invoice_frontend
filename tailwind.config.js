@@ -54,7 +54,8 @@ export default {
         light_blue: "#f2f3f4",
         table_border:"#000a1e33",
         blue_charcoal: "#000A1E",
-        spanish_green: "#00823c"
+        spanish_green: "#00823c",
+        
     },
 
 

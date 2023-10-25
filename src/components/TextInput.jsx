@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({ id, name, type, placeholder, value, onChange, error,disabled , onFocus}) => {
+const TextInput = ({ id, name, type, placeholder, value, onChange, error,disabled , onFocus, className}) => {
     
     return (
         <div >
@@ -9,13 +9,11 @@ const TextInput = ({ id, name, type, placeholder, value, onChange, error,disable
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                value={value}
+                value={value || ''}
                 onChange={onChange}
                 disabled={disabled}
                 onFocus={onFocus}
-                className={`block w-full border-b-2 border-gray-300 py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 ${error ? 'border-red-500' : ''
-                    }`}
-                  
+                className={`block w-full border-b-2 border-gray-300 py-1.5 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 ${error ? 'border-red-500' : ''} ${className || ''}`}
             />
             {error && <div className="text-red-500 text-sm">{error}</div>}
         </div>
