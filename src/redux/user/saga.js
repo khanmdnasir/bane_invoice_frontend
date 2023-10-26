@@ -69,21 +69,18 @@ function* updateUser(formData) {
     try {
         const response = yield call(updateUserApi, formData.payload);
         const result = response.data;
-        console.log("My Result:",result);
-        // if (result.success) {
-        //     yield put({ type: "UPDATE_USER_SUCCESS", user: result });
-        //     // yield put(setSuccess({type: "SET_SUCCESS", success: [{'msg':'User created successfully'}]}));
+        if (result.success) {
+            yield put({ type: 'UPDATE_USER_SUCCESS', user: result });
+            yield put(setSuccess({type: "SET_SUCCESS", success: [{'msg':'User Updated successfully'}]}));
 
-        // } 
-        // else {
+        } 
+        else {
       
-        //     yield put({ type: 'ADD_USER_FAILED', error: result.data });
-        // }
+            yield put(setError({type: "SET_ERROR", error: error.response.data.data}));
+        }
 
     } catch (error) {
-        console.log("Hello")
-        // yield put({ type: 'ADD_USER_FAILED', error: error.response.data.data });
-        // yield put(setError({type: "SET_ERROR", error: error.response.data.data}));
+        yield put(setError({type: "SET_ERROR", error: error.response.data.data}));
     }
 }
 

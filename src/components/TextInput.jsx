@@ -1,7 +1,8 @@
 import React from 'react';
 
-const TextInput = ({ id, name, type, placeholder, value, onChange, error,disabled , onFocus, className}) => {
-    
+const TextInput = ({ id, name, type, placeholder, value, onChange, error,disabled, onFocus , className}) => {
+
+
     return (
         <div >
             <input

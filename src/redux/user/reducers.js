@@ -18,7 +18,7 @@ const INIT_STATE = {
 
 
 const User = (state = INIT_STATE, action) => {
-   
+
     switch (action.type) {
         case type.GET_USER_REQUESTED: {
 
@@ -33,7 +33,6 @@ const User = (state = INIT_STATE, action) => {
                 ...state,
                 loading: false,
                 users: action.data.data,
-                // usersid: action.data.results,
                 previous: action.data.previous,
                 next: action.data.next,
                 current_page: action.data.current_page,
@@ -94,11 +93,22 @@ const User = (state = INIT_STATE, action) => {
             return newState
         }
 
-        case type.UPDATE_USER_SUCCESS:{
-            return{
-                ...state,
-                users: action.data.data,
-            }
+        case type.UPDATE_USER_SUCCESS: { 
+  
+        const updatedUser = action.user.data;
+      
+        const updatedUsers = state.users.map(user => {
+          if (user.id === updatedUser.id) {
+            return updatedUser; 
+          } else {
+            return user;
+          }
+        });
+      
+        return {
+          ...state,
+          users: updatedUsers,
+        };
         }
 
         case type.ADD_USER_FAILED: {
